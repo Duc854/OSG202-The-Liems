@@ -11,23 +11,44 @@ echo '  "data": {' >> "$output_file"
 # Hàm để trích xuất giải và giá trị từ đoạn HTML
 extract_result() {
     local prize="$1"
-    local value=("$2")  # Lưu ý dấu ngoặc () để biểu diễn mảng
-    
+    local value="$2"
+
+    # Thay thế dấu xuống dòng bằng dấu cách
+    local formatted_value=$(echo "$value" | tr '\n' ' ')
+
+    # Xóa dấu cách cuối cùng
+    formatted_value="${formatted_value%" "}"
+
     # Kiểm tra nếu value là mảng
-    if [ "${value[@]}" ]; then
+    if [[ ${#value[@]} ]]; then
         # Nếu là mảng, sử dụng dấu ngoặc vuông để đại diện cho mảng trong JSON
         echo '      "'"$prize"'": [' >> "$output_file"
-        for val in "${value[@]}"; do
+        
+        count=0
+        for val in $formatted_value; do
             echo '        "'"$val"'",' >> "$output_file"
+            ((count++))
         done
+        
+        # Viet them vao cho du 6 phan tu
+        if [[ count -lt 6 ]]; then 
+            for ((i=0; i < 6 - count; i++)); do
+                echo '        "'""'",' >> "$output_file"
+            done
+        fi
+        
         # Xóa dấu phẩy cuối cùng và đóng mảng JSON
         sed -i '$ s/,$//' "$output_file"
         echo '      ],' >> "$output_file"
     else
         # Nếu không phải mảng, sử dụng chuỗi thông thường
-        echo '      "'"$prize"'": "'"$value"'",' >> "$output_file"
+        echo '      "'"$prize"'": ["'"$formatted_value"'"],' >> "$output_file"
     fi
 }
+
+
+
+
 
 
 
@@ -39,7 +60,7 @@ while [ "$current_date" != "$end_date" ]; do
     html_content=$(curl -s "$url")
 
     # Bắt đầu một ngày mới trong file JSON
-    echo '    "'"$formatted_date"'": {' >> "$output_file"
+    echo '    "Ngay '"$formatted_date"'": {' >> "$output_file"
 
     # Trích xuất giải ĐB và giá trị
     db_prize=$(echo "$html_content" | grep -oP '<td class="giai_dac_biet"><span class="box_kh khtemp">([0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+ [A-Z]+)</span><div class="lq_1" data="([0-9]+)">[0-9]+</div></td>' | grep -oP 'data="([0-9]+)"' | grep -oP '[0-9]+')
@@ -67,6 +88,7 @@ extract_result "G.Sau" "${sau[@]: -11}"
 
 bay=$(echo "$html_content" | grep -oP '<td class="giai_bay"><div class="lq_1" data="[0-9]+">[0-9]+</div><div class="lq_2" data="[0-9]+">[0-9]+</div><div class="lq_3" data="[0-9]+">[0-9]+</div><div class="lq_4" data="[0-9]+">[0-9]+</div></td>' | grep -oP 'data="([0-9]+)"' | grep -oP '[0-9]+')
 extract_result "G.Bay" "${bay[@]}"
+sed -i '$ s/,$//' "$output_file"
 
     # Kết thúc một ngày trong file JSON
     echo '    },' >> "$output_file"
