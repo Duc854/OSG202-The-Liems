@@ -1,5 +1,9 @@
-start_date="2023-01-01"
-end_date="2024-02-05"
+echo "Nhập ngày bắt đầu:"
+read -p "Nhập ngày bắt đầu (theo định dạng YYYY-MM-DD): " start_date
+
+echo "Nhập ngày kết thúc:"
+read -p "Nhập ngày kết thúc (theo định dạng YYYY-MM-DD): " end_date
+
 output_file="../KetQua/ketqua.json"
 
 current_date="$start_date"
