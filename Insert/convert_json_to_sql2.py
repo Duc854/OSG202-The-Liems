@@ -44,7 +44,7 @@ def update_database_from_json(json_file_path, db_file_path):
 # Đường dẫn đến tệp JSON và cơ sở dữ liệu SQLite
 json_file_path = '~/OSG202-The-Liems/KetQua/ketqua.json'
 json_file_path = os.path.expanduser(json_file_path)
-db_file_path = '~/OSG202-The-Liems/database/output2.db'
+db_file_path = '~/OSG202-The-Liems/database/database.db'
 db_file_path = os.path.expanduser(db_file_path)
 
 
