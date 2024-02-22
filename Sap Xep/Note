@@ -1,0 +1,3 @@
+Note:
+Chỉ sort được khi cùng folder với file database.db
+Chạy bằng cách gõ "python3 sx.py"
