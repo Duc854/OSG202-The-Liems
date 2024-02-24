@@ -1,8 +1,11 @@
 import sqlite3
 import os
 
-# Kết nối đến cơ sở dữ liệu
-conn = sqlite3.connect('database.db')
+# Xác định đường dẫn đến file database
+db_file_path = '~/OSG202-The-Liems/Database/database.db'
+db_file_path = os.path.expanduser(db_file_path)	
+# Kết nối với cơ sở dữ liệu	
+conn = sqlite3.connect(db_file_path)
 cursor = conn.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS my_table (
@@ -10,9 +13,8 @@ cursor.execute('''
         value INTEGER
     )
 ''')
-
 # Định nghĩa danh sách các giải
-categories = ['G.Db', 'G.Nhat', 'G.Nhi', 'G.Ba', 'G.Tu', 'G.Nam', 'G.Sau', 'G.Bay']
+categories = ['G.DB', 'G.Nhat', 'G.Nhi', 'G.Ba', 'G.Tu', 'G.Nam', 'G.Sau', 'G.Bay']
 
 # Lặp qua từng giải và thực hiện câu lệnh SQL để lấy ra 3 số xuất hiện ít nhất và 3 số xuất hiện nhiều nhất
 for category in categories:
