@@ -51,7 +51,7 @@ for category in categories:
 df = pd.DataFrame(results)
 
 # Lưu DataFrame vào tệp Excel
-output_excel_path = 'KetQuaSort.xlsx'
+output_excel_path = '~/OSG202-The-Liems/KetQua/KetQuaSort.xlsx'
 df.to_excel(output_excel_path, index=False)
 
 # Đóng kết nối với cơ sở dữ liệu

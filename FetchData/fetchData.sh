@@ -1,7 +1,5 @@
-echo "Nhập ngày bắt đầu:"
 read -p "Nhập ngày bắt đầu (theo định dạng YYYY-MM-DD): " start_date
 
-echo "Nhập ngày kết thúc:"
 read -p "Nhập ngày kết thúc (theo định dạng YYYY-MM-DD): " end_date
 
 output_file="../KetQua/ketqua.json"

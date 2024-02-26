@@ -2,7 +2,7 @@
 
 # Hàm hiển thị menu chính
 show_main_menu() {
-    selection=$(zenity --list --title="Main Menu" --text="Choose an option:" --column="Option" "Lấy dữ liệu trúng thưởng" "Đưa dữ liệu vào database" "Update data" --height=250 --width=300)
+    selection=$(zenity --list --title="Main Menu" --text="Choose an option:" --column="Option" "Lấy dữ liệu trúng thưởng" "Đưa dữ liệu vào database" "Dua 3 so xuat hien nhieu nhat, it nhat moi giai" --height=200 --width=350)
 
     case $selection in
         "Lấy dữ liệu trúng thưởng")
@@ -14,9 +14,9 @@ show_main_menu() {
             # Thực thi tùy chọn 2
             python3 ~/OSG202-The-Liems/Insert/convert_json_to_sql2.py
             ;;
-        "Update data")
+        "Dua 3 so xuat hien nhieu nhat, it nhat moi giai")
             # Gọi hàm để xử lý tùy chọn 3
-            handle_update_data
+            python3 ~/OSG202-The-Liems/SapXep/sort.py
             ;;
         *)
             # Người dùng chọn thoát hoặc đóng cửa sổ
