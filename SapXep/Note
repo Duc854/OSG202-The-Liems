@@ -1,2 +1,7 @@
 Note:
 Chạy bằng cách gõ "python3 sort.py"
+cai pandas truoc khi chay bang lenh "pip install pandas"
+neu bi loi thi go lenh "sudo apt install python3-pip"
+neu co loi thi go lenh "sudo apt-get update"
+sau do cai pandas bang lenh "pip install pandas"
+
