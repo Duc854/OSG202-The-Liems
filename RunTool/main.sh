@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Hiển thị menu chính
+# Hàm hiển thị menu chính
 show_main_menu() {
     selection=$(zenity --list --title="Main Menu" --text="Choose an option:" --column="Option" "Lấy dữ liệu trúng thưởng" "Đưa dữ liệu vào database" "Update data" --height=250 --width=300)
 
@@ -32,6 +32,8 @@ handle_update_data() {
     zenity --info --text="Updating data to before the current date."
 }
 
-# Hiển thị menu chính khi chạy script
-show_main_menu
+# Vòng lặp để hiển thị menu chính liên tục
+while true; do
+    show_main_menu
+done
 
